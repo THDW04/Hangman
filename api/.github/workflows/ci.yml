@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    uses: alexischarp/ci-templates/.github/workflows/build-push.yml@main
+    with:
+      image: 'ghcr.io/alexischarp/hangman-api'
+      tags: |
+        prod
+        latest
+    secrets:
+      GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
